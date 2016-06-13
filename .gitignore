@@ -87,7 +87,7 @@ git.properties
 .nb-gradle
 /classes
 build
-gradle.properties
+!gradle.properties
 checkstyle-config.xml
 pmd-config.xml
 findbugs-config.xml

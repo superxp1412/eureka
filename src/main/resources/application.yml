@@ -1,9 +1,48 @@
+---
+spring:
+    profiles:
+        active: local1
+
 server:
-  port: 8761
+    context-path: /registry
+---
+spring:
+    profiles: local1
+server:
+  port: 8989
 
 eureka:
+#  instance:
+#    statusPageUrlPath: /info
+#    healthCheckUrlPath: /health
   client:
-    registerWithEureka: false
-    fetchRegistry: false
+    registerWithEureka: true
+    fetchRegistry: true
+    healthcheck:
+          enabled: true
+    eurekaServerUrlContext: /registry
+    serviceUrl:
+        defaultZone: http://localhost:9898/registry/eureka/
+  server:
+    waitTimeInMsWhenSyncEmpty: 0
+
+---
+spring:
+    profiles: local2
+server:
+  port: 9898
+
+eureka:
+#  instance:
+#    statusPageUrlPath: /info
+#    healthCheckUrlPath: /health
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    healthcheck:
+          enabled: true
+    eurekaServerUrlContext: /registry
+    serviceUrl:
+            defaultZone: http://localhost:8989/registry/eureka/
   server:
     waitTimeInMsWhenSyncEmpty: 0
